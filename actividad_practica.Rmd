@@ -1,0 +1,41 @@
+---
+title: "actividad practica"
+author: "Coordinador GEI - eCh"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+
+# Cargar datos
+
+```{r}
+
+```
+
+# Mirar datos
+
+```{r}
+
+
+```
+
+# Analisis path
+
+
+## Espesificar modelo
+
+```{r}
+
+```
+
+## Evaluar y proyectar modelo
+
+```{r}
+
+```
+
+
+## Dibujar modelo
+
+
+
