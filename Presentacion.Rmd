@@ -1,5 +1,5 @@
 ---
-title: "Postulación eCh"
+title: "Ayudantia path"
 subtitle: " "
 author: ""
 date: " "
@@ -32,6 +32,14 @@ pacman::p_load(RefManageR)
 # Correr esta linea para ejecutar
 rmarkdown::render('xaringan::moon_reader')
 ```
+
+```{r, echo=FALSE}
+
+#install.packages("xaringan")
+#install.packages("htmltools")
+#install.packages("magrittr")
+```
+
 
 <!---
 About macros.js: permite escalar las imágenes como [:scale 50%](path to image), hay si que grabar ese archivo js en el directorio.
@@ -74,10 +82,12 @@ class: inverse, middle, center, slideInRight
 
 #  Comprendiendo el uso de path
 ---
+class: canvas
 
 # "Los ingresos de los padres influyen en los resultados PSU" 
 
 > ¿Qué opinamos sobre esto? 
+
 
 ???
 
@@ -174,6 +184,7 @@ class: inverse, middle, center, slideInRight
  
 # Interpretación de resultados 
 
+
 ---
 
 ![](images/mediacion_efectos.png)
@@ -188,9 +199,17 @@ class: inverse, middle, center, slideInRight
 > Leer resultados e interpretar
 
 ---
+# Como leer el ajuste del modelo
+
 
 ![](images/resultadosgraficos.png)
+* p de x2 < 0.05 
 
+* X2/gl < 0.4
+
+* RMSEA < 0.8, ideal < 0.5
+
+* TLI/CFI > 0.9
 
 ---
 
@@ -221,12 +240,12 @@ class: inverse, middle, center, slideInRight
 ---
 
 # Para acceder a los datos:
-
+.center[
 ![](images/qr_ayudantia_path.png)
+]
+---
 
---- 
-
-# Actividades:
+# Actividad:
 
 * Representen en lenguaje lavann el modelo
 
@@ -236,22 +255,8 @@ class: inverse, middle, center, slideInRight
 
 * Decidir el modelo
 
+
+![:scale 80%](images/ejemplo_modelaje.png)
+
 .small[ __reconocimiento__: Ejercicio propuesto por Cristobal Moya, Docente Magister y diplomado UDP]
 
----
-
-# Pasos: 
-
-0. Cargar y revisar la data
-
-
-
-1. Especificar modelo
-
-  * Se utiliza ~ para señalar que a es explicado por (a~b) y + si hay varios predictores
-
-
-![](images/ejemplo_modelaje.png)
-
-
----

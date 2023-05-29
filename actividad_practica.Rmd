@@ -37,5 +37,15 @@ output: html_document
 
 ## Dibujar modelo
 
+```{r}
+
+```
 
 
+# Evaluar indices de modificación
+
+```{r}
+
+```
+
+# Proponer nuevo modelo

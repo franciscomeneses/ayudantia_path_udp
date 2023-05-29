@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="" xml:lang="">
   <head>
-    <title>Postulación eCh</title>
+    <title>Ayudantia path</title>
     <meta charset="utf-8" />
     <meta name="author" content="" />
     <script src="libs/header-attrs/header-attrs.js"></script>
@@ -11,6 +11,9 @@
     <textarea id="source">
 
 class: inverse, bottom, right
+
+
+
 
 
 
@@ -60,10 +63,12 @@ class: inverse, middle, center, slideInRight
 
 #  Comprendiendo el uso de path
 ---
+class: canvas
 
 # "Los ingresos de los padres influyen en los resultados PSU" 
 
 &gt; ¿Qué opinamos sobre esto? 
+
 
 ???
 
@@ -158,6 +163,7 @@ class: inverse, middle, center, slideInRight
  
 # Interpretación de resultados 
 
+
 ---
 
 ![](images/mediacion_efectos.png)
@@ -172,9 +178,17 @@ class: inverse, middle, center, slideInRight
 &gt; Leer resultados e interpretar
 
 ---
+# Como leer el ajuste del modelo
 
-![](resultadosgraficos.png)
 
+![](images/resultadosgraficos.png)
+* p de x2 &lt; 0.05 
+
+* X2/gl &lt; 0.4
+
+* RMSEA &lt; 0.8, ideal &lt; 0.5
+
+* TLI/CFI &gt; 0.9
 
 ---
 
@@ -202,36 +216,29 @@ class: inverse, middle, center, slideInRight
  
 # Practica en R 
 
-qr
+---
 
---- 
+# Para acceder a los datos:
+.center[
+![](images/qr_ayudantia_path.png)
+]
+---
 
-# Actividades:
-
-
+# Actividad:
 
 * Representen en lenguaje lavann el modelo
+
 * Interpreten los resultados
+
 * Evaluar parametros de ajuste
+
 * Decidir el modelo
 
----
 
-# Pasos: 
+![:scale 80%](images/ejemplo_modelaje.png)
 
-0. Cargar y revisar la data
+.small[ __reconocimiento__: Ejercicio propuesto por Cristobal Moya, Docente Magister y diplomado UDP]
 
-
-
-1. Especificar modelo
-
-  * Se utiliza ~ para señalar que a es explicado por (a~b) y + si hay varios predictores
-
-
-![](images/ejemplo_modelaje.png)
-
-
----
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
