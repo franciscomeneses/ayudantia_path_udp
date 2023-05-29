@@ -203,9 +203,9 @@ class: inverse, middle, center, slideInRight
 
 
 ![](images/resultadosgraficos.png)
-* p de x2 < 0.05 
+* p de x2 > 0.05; Se espera no significación de la diferencia de las matrises observada y reproducida.
 
-* X2/gl < 0.4
+* X2/gl < 4
 
 * RMSEA < 0.8, ideal < 0.5
 
