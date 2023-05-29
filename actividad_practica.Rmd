@@ -1,6 +1,6 @@
 ---
 title: "actividad practica"
-author: "Coordinador GEI - eCh"
+author: "Ayudante -  Francisco Meneses"
 date: "`r Sys.Date()`"
 output: html_document
 ---
