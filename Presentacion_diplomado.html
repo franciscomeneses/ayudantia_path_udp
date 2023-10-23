@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Ayudantia path</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link rel="stylesheet" href="xaringan_custom/xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+class: inverse, bottom, right
+
+
+
+
+
+
+
+
+
+
+
+&lt;!---
+About macros.js: permite escalar las imágenes como [:scale 50%](path to image), hay si que grabar ese archivo js en el directorio.
+.pull-left[&lt;images/Conocimiento cívico.png&gt;] 
+.pull-right[&lt;images/Conocimiento cívico_graf.png&gt;]
+
+---&gt;
+
+# __Análisis estadistico avanzado: Análisis de senderos y Análisis factoriales __
+
+### utilidad, teoría y aplicación con lavaan
+&lt;br&gt;
+&lt;hr&gt;
+
+
+### _Cristobal Moya_
+### _Francisco Javier Meneses Rivas_
+
+
+&lt;br&gt;
+
+---
+
+# Tipos de modelos
+--
+
+
+
+* Modelos de medida
+
+    - Como se mide, validez y fiabilidad
+
+* Modelos de estructura
+
+    - Explicación
+
+---
+
+
+class: inverse, middle, center, slideInRight
+
+#  Analisis de senderos
+
+---
+
+# Objetivo:
+####  _Comprender la tecnica de path analisis, demostrando saber su utilidad y su aplicación con el paquete lavaan_
+
+# Indice:
+
+1. ¿Para qué sirve PATH? 
+2. Modelamiento con PATH: __Diagramas, formulas y codigos__
+3. Ejercicio practico: Aplicación de modelo PATH 
+
+---
+
+layout: true
+class: animated, fadeIn
+
+---
+class: inverse, middle, center, slideInRight
+
+#  Comprendiendo el uso de path
+---
+class: canvas
+
+# "Los ingresos de los padres influyen en los resultados PSU" 
+
+&gt; ¿Qué opinamos sobre esto? 
+
+
+???
+
+
+Mediación 
+
+---
+
+# Analisemoslo empiricamente
+
+![](images/ejercicio_path_qrcode.png)
+
+---
+
+# Resumen: Utilidad de path 
+
+
+Path nos permite comprender __“cadenas causales”__, es decir, como variables se explican consecutivamente en el tiempo. Pasamos de hablar de “que explica algo” (regresión) al “como se explica algo” (modelo path), pues empezamos a hablar de __procesos de relaciones en el tiempo__. 
+
+
+### Mediación
+
+* Permite comprender cuanto del efecto de X sobre Y pasa a travez de una tercera variable M, y cuanto efecto es directo sin pasar por ella.
+
+* Evaluación de efectos directos, indirectos y totales.
+
+
+---
+class: inverse, middle, center, slideInRight
+
+# Modelamiento con PATH analisis 
+
+
+---
+# Ejmplo de modelamiento teorico con diagramas
+
+Ejemplo: [_(EBERLE, MILAN,DE TONI &amp; LAZZARI, 2016)_](https://www.revistaespacios.com/a16v37n25/16372525.html)
+
+* H1: Una buena reputación de la empresa de servicios influye positivamente en la confianza del cliente en el proveedor de servicios.
+
+* H2: La reputación positiva de la empresa proveedora de servicios influye positivamente en la retención de clientes.
+
+* H3: La confianza depositada por el cliente en el proveedor de servicios influye positivamente en la retención de clientes.
+
+* H4: La relación entre la reputación del proveedor de servicios y la retención de clientes es mediada por la confianza depositada por el cliente en el proveedor de servicios.
+
+???
+
+Actividad: hacer un diagrama de esto
+
+---
+# Ejmplo de modelamiento teorico con diagramas
+
+
+
+![:scale 100%](images/ensenachiledesafios.png)
+
+???
+
+identificar efecto directo e indirecto
+
+---
+class: inverse, middle, center, slideInRight
+ 
+# Modelamiento en lavaan 
+---
+
+# ¿Como evaluamos este modelo con lavaan?
+
+.center[
+![:scale 50%](images/ensenachiledesafios.png)
+]
+
+
+```r
+# Cargar el paquete lavaan
+library(lavaan)
+
+# Definir el modelo, señalando las relaciones
+
+model &lt;- '
+  confianza ~  reputacion
+  retencion ~ confianza + reputacion'
+
+#Evaluar modelo
+
+fit &lt;- lavaan::sem(model, data = tus_datos) #calcular 
+summary(fit, standardized = TRUE, fit.measures = TRUE) #inspeccionar
+```
+
+
+---
+
+class: inverse, middle, center, slideInRight
+ 
+# Interpretación de resultados 
+
+
+---
+
+![](images/mediacion_efectos.png)
+???
+
+* __Efectos totales__: Efecto de X sobre Y, sin controlar por M (0,66**)
+
+* __Efectos directos__: Efecto de X sobre Y, controlando por el efecto que pasa por M (0,32**)
+
+* __Efectos indirectos__: Efecto de X sobre Y que pasa a traves de M (0,34**). Se calcula como el efecto X sobre M, multiplicado por el efecto de M sobre Y. 
+
+&gt; Leer resultados e interpretar
+
+---
+# Como leer el ajuste del modelo
+
+
+![](images/resultadosgraficos.png)
+* p de x2 &gt; 0.05; Se espera no significación de la diferencia de las matrises observada y reproducida.
+
+* X2/gl &lt; 4
+
+* RMSEA &lt; 0.8, ideal &lt; 0.5
+
+* TLI/CFI &gt; 0.9
+
+---
+
+# ¿Como se ve en r?
+
+[Introduction to Path Analysis in R - Thomas Bihansky](https://rpubs.com/tbihansk/302732)
+
+???
+
+mpg: Millas por galón, es la eficiencia de combustible del automóvil, es decir, cuántas millas puede recorrer el automóvil por galón de combustible.
+cyl: Número de cilindros del motor del automóvil.
+disp: Desplazamiento (cilindrada) del motor en pulgadas cúbicas. Representa el volumen total de todos los cilindros del motor.
+hp: Potencia neta del motor en caballos de fuerza (horsepower).
+drat: Relación de engranajes traseros, es decir, la relación entre la velocidad del eje de transmisión y la velocidad del eje de transmisión trasero.
+wt: Peso del automóvil en miles de libras.
+qsec: Tiempo de cuarto de milla, es el tiempo que tarda el automóvil en recorrer un cuarto de milla desde un punto de partida en reposo.
+vs: Tipo de motor (0 = motor en V, 1 = motor en línea).
+am: Tipo de transmisión (0 = automática, 1 = manual).
+gear: Número de marchas (engranajes) en la transmisión.
+carb: Número de carburadores.
+
+---
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="xaringan_custom/macros.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
